@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int i;
+string s;
+
+struct tree_node{
+	char data;
+	struct tree_node *left;
+	struct tree_node *right;
+
+	tree_node(char c):data(c), left(NULL), right(NULL){}//default constructor of tree_node，初始化列表
+};
+
+
+tree_node* creat_tree(char c){
+	char c = s[i++];
+	if(c == '#') return NULL;
+
+	tree_node *root = new tree_node(c);
+	root -> left = creat_tree();
+	root -> right = creat_tree();
+	return root;
+}
+
+void in_order(tree_node* root){// 中序遍历
+	if(!root) return;
+	in_order(root -> left);
+	cout << root -> data << " ";
+	in_order(root -> right);
+}
+
+int main(){
+	while(cin >> s){
+		i = 0;
+		tree_node  *root = creat_tree();
+		in_order(root);
+		cout << endl;
+	}
+	return 0;
+}
